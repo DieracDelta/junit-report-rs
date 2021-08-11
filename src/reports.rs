@@ -105,13 +105,13 @@ impl Report {
                     TestResult::Success => {
                         if let Some(system_out) = &tc.system_out {
                             ew.write(XmlEvent::start_element("system-out"))?;
-                            ew.write(XmlEvent::CData(system_out.as_str()))?;
+                            ew.write(XmlEvent::characters(system_out.as_str()))?;
                             ew.write(XmlEvent::end_element())?;
                         }
 
                         if let Some(system_err) = &tc.system_err {
                             ew.write(XmlEvent::start_element("system-err"))?;
-                            ew.write(XmlEvent::CData(system_err.as_str()))?;
+                            ew.write(XmlEvent::characters(system_err.as_str()))?;
                             ew.write(XmlEvent::end_element())?;
                         }
                     }
@@ -126,11 +126,11 @@ impl Report {
                         )?;
                         if let Some(stdout) = &tc.system_out {
                             let data = strip_ansi_escapes::strip(stdout.as_str())?;
-                            ew.write(XmlEvent::CData(&String::from_utf8_lossy(&data)))?;
+                            ew.write(XmlEvent::characters(&String::from_utf8_lossy(&data)))?;
                         }
                         if let Some(stderr) = &tc.system_err {
                             let data = strip_ansi_escapes::strip(stderr.as_str())?;
-                            ew.write(XmlEvent::CData(&String::from_utf8_lossy(&data)))?;
+                            ew.write(XmlEvent::characters(&String::from_utf8_lossy(&data)))?;
                         }
                         ew.write(XmlEvent::end_element())?;
                     }
@@ -145,11 +145,11 @@ impl Report {
                         )?;
                         if let Some(stdout) = &tc.system_out {
                             let data = strip_ansi_escapes::strip(stdout.as_str())?;
-                            ew.write(XmlEvent::CData(&String::from_utf8_lossy(&data)))?;
+                            ew.write(XmlEvent::characters(&String::from_utf8_lossy(&data)))?;
                         }
                         if let Some(stderr) = &tc.system_err {
                             let data = strip_ansi_escapes::strip(stderr.as_str())?;
-                            ew.write(XmlEvent::CData(&String::from_utf8_lossy(&data)))?;
+                            ew.write(XmlEvent::characters(&String::from_utf8_lossy(&data)))?;
                         }
                         ew.write(XmlEvent::end_element())?;
                     }
@@ -164,13 +164,13 @@ impl Report {
 
             if let Some(system_out) = &ts.system_out {
                 ew.write(XmlEvent::start_element("system-out"))?;
-                ew.write(XmlEvent::CData(system_out.as_str()))?;
+                ew.write(XmlEvent::characters(system_out.as_str()))?;
                 ew.write(XmlEvent::end_element())?;
             }
 
             if let Some(system_err) = &ts.system_err {
                 ew.write(XmlEvent::start_element("system-err"))?;
-                ew.write(XmlEvent::CData(system_err.as_str()))?;
+                ew.write(XmlEvent::characters(system_err.as_str()))?;
                 ew.write(XmlEvent::end_element())?;
             }
 
