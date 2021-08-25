@@ -147,6 +147,7 @@ impl Report {
                             ew.write(XmlEvent::start_element("system-out"))?;
                             let data = strip_ansi_escapes::strip(stdout.as_str())?;
                             ew.write(XmlEvent::characters(&String::from_utf8_lossy(&data)))?;
+                            ew.write(XmlEvent::end_element())?;
                         }
                         if let Some(stderr) = &tc.system_err {
                             let data = strip_ansi_escapes::strip(stderr.as_str())?;
