@@ -144,6 +144,7 @@ impl Report {
                                 .attr("message", &message),
                         )?;
                         if let Some(stdout) = &tc.system_out {
+                            ew.write(XmlEvent::start_element("system-out"))?;
                             let data = strip_ansi_escapes::strip(stdout.as_str())?;
                             ew.write(XmlEvent::characters(&String::from_utf8_lossy(&data)))?;
                         }
